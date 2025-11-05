@@ -1,79 +1,34 @@
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 class Login {
 
     username = "#user-name";
     password = "#password";
     button = "#login-button";
-    logo = ".app_logo"
+    logo = ".app_logo";
+    errorMessage = '[data-test="error"]';
 
     visit(){
         cy.visit('https://www.saucedemo.com/');
     }
 
     enterUsername(username){
-
         cy.get(this.username).type(username);
     }
 
-
     enterPassword(password){
-    cy.get(this.password).type(password);
+        cy.get(this.password).type(password);
     }
 
     clickLogin(){
-        cy.get(this.button).click();
+        cy.get(this.button,{timeout:10000}).click();
     }
 
     verifyLogin(){
-        cy.get(this.logo).should('exist', 'expectedTitle')
+        cy.get(this.logo).should('exist');
+    }
 
-        
+    verifyErrorMessage(expectedMessage){
+        cy.get(this.errorMessage).should('contain.text', expectedMessage);
     }
 
     login(username, password){
@@ -82,31 +37,6 @@ class Login {
         this.clickLogin();
         this.verifyLogin();
     }
-
 }
 
 export default Login
-
-
-
-
-// Class Login{
-//     enterUsername(){
-//         cy.get(#user-name).type(username);
-//     }
-
-//     enterPassword(){
-//     cy.get(#password).type(password);
-//     }
-
-//     clickLogin(){
-//         cy.get(#login-button).click();
-//     }
-
-//     verifyLogin(){
-//         cy.get(.app_logo).should('contain.text', 'expectedTitle')
-//     }
-
-// }
-
-// export default Login

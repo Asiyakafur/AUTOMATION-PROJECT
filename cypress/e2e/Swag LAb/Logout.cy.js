@@ -27,5 +27,14 @@ describe('Swag Logout',()=>{
       //verify logout
       logout.verifyLogout(); 
     });
+
+
+
+    it('burger menu should not be seen without being logged in', () => {
+    
+    cy.visit('https://www.saucedemo.com/');
+
+    cy.get('#react-burger-menu-btn').should('not.exist');
+  });
 });
 
